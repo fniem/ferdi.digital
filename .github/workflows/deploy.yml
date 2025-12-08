@@ -9,68 +9,63 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup SSH
-      run: |
-        mkdir -p ~/.ssh
-        printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
-        chmod 600 ~/.ssh/id_ed25519
-        chmod 700 ~/.ssh
-        
-        # Validate the key format
-        if ! ssh-keygen -l -f ~/.ssh/id_ed25519 >/dev/null 2>&1; then
-          echo "Error: Invalid SSH private key format."
-          echo "Make sure DEPLOY_SSH_KEY contains the private key (starts with -----BEGIN OPENSSH PRIVATE KEY-----)"
-          echo "Not the public key (ssh-ed25519 AAAAC3...)"
-          exit 1
-        fi
-        
-        ssh-keyscan -H -p ${{ secrets.DEPLOY_PORT }} 49.13.30.183 >> ~/.ssh/known_hosts
-        
-    - name: Test SSH connection
-      run: |
-        ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -T -i ~/.ssh/id_ed25519 ${{ secrets.DEPLOY_USER }}@49.13.30.183 -p ${{ secrets.DEPLOY_PORT }} 'echo "SSH connection successful"'
-
-    - name: Deploy via SSH
-      run: |
-        ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -T -i ~/.ssh/id_ed25519 ${{ secrets.DEPLOY_USER }}@49.13.30.183 -p ${{ secrets.DEPLOY_PORT }} << 'EOF'
-          set -e
-          
-          # Setup SSH for GitHub if not already done
+      - name: Setup SSH
+        run: |
           mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
           chmod 700 ~/.ssh
-          
-          # Create projects directory if it doesn't exist
-          mkdir -p /home/${{ secrets.DEPLOY_USER }}/projects
-          
-          # Clone or update the repository in a temporary build directory
-          BUILD_DIR="/tmp/ferdi-digital-build-$$"
-          if [ -d "/home/${{ secrets.DEPLOY_USER }}/projects/ferdi.digital/.git" ]; then
-            echo "Repository exists, updating..."
-            cd /home/${{ secrets.DEPLOY_USER }}/projects/ferdi.digital
-            git pull origin main
-            cp -r . "$BUILD_DIR"
-          else
-            echo "Repository doesn't exist, cloning..."
-            git clone git@github.com:ferniemann/ferdi.digital.git "$BUILD_DIR"
+
+          # Validate the key format
+          if ! ssh-keygen -l -f ~/.ssh/id_ed25519 >/dev/null 2>&1; then
+            echo "Error: Invalid SSH private key format."
+            echo "Make sure DEPLOY_SSH_KEY contains the private key (starts with -----BEGIN OPENSSH PRIVATE KEY-----)"
+            echo "Not the public key (ssh-ed25519 AAAAC3...)"
+            exit 1
           fi
-          
-          # Build in temporary directory
-          cd "$BUILD_DIR"
-          npm install --frozen-lockfile
-          npx astro build
-          
-          # Create/clear the deployment directory
-          mkdir -p /home/${{ secrets.DEPLOY_USER }}/projects/ferdi.digital
-          rm -rf /home/${{ secrets.DEPLOY_USER }}/projects/ferdi.digital/*
-          
-          # Move built files to deployment directory
-          mv dist/* /home/${{ secrets.DEPLOY_USER }}/projects/ferdi.digital/
-          
-          # Clean up temporary build directory
-          rm -rf "$BUILD_DIR"
-          
-          echo "Deployment complete! Built files are now in /home/${{ secrets.DEPLOY_USER }}/projects/ferdi.digital/"
-        EOF
+
+          ssh-keyscan -H -p ${{ secrets.DEPLOY_PORT }} 49.13.30.183 >> ~/.ssh/known_hosts
+
+      - name: Test SSH connection
+        run: |
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -T -i ~/.ssh/id_ed25519 ${{ secrets.DEPLOY_USER }}@49.13.30.183 -p ${{ secrets.DEPLOY_PORT }} 'echo "SSH connection successful"'
+
+      - name: Deploy via SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -T -i ~/.ssh/id_ed25519 ${{ secrets.DEPLOY_USER }}@49.13.30.183 -p ${{ secrets.DEPLOY_PORT }} << 'EOF'
+            set -e
+
+            LIVE_DIR="/home/${{ secrets.DEPLOY_USER }}/projects/ferdi.digital"
+            REPO_URL="git@github.com:fniem/ferdi.digital.git"
+            BUILD_DIR="/tmp/ferdi.digital-build-$(date +%s)"
+            PM2_APP_NAME="ferdi.digital"
+
+            # Bun-Umgebung laden
+            export BUN_INSTALL="$HOME/.bun"
+            export PATH="$BUN_INSTALL/bin:$PATH"
+
+            echo "--- 1. Code in temporäres Verzeichnis klonen ---"
+            git clone "$REPO_URL" "$BUILD_DIR"
+            cd "$BUILD_DIR"
+
+            echo "--- 2. Abhängigkeiten installieren und App bauen ---"
+            bun install --frozen-lockfile
+            bun run build
+
+            echo "--- 3. Gebaute Anwendung bereitstellen ---"
+            mkdir -p "$(dirname "$LIVE_DIR")"
+            rm -rf "$LIVE_DIR/.output"
+            mv "$BUILD_DIR/.output" "$BUILD_DIR/ecosystem.config.cjs" "$LIVE_DIR"
+
+            echo "--- 4. Temporäres Build-Verzeichnis bereinigen ---"
+            rm -rf "$BUILD_DIR"
+
+            echo "--- 5. Anwendung mit PM2 neu starten ---"
+            cd "$LIVE_DIR"
+            pm2 restart ecosystem.config.cjs || pm2 start ecosystem.config.cjs --name "$PM2_APP_NAME"
+
+            echo "Deployment erfolgreich abgeschlossen!"
+          EOF
