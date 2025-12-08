@@ -1,0 +1,24 @@
+:root {
+  --clr-blue-900: #0b132b;
+  --clr-blue-800: #1c2541;
+  --clr-blue-500: #3a506b;
+  --clr-blue-400: #5bc0be;
+  --clr-blue-300: #6fffe9;
+
+  --size-regular: 1rem;
+  --size-txt-xl: calc(var(--size-regular) * 2);
+  --size-txt-l: calc(var(--size-regular) * 1.25);
+  --size-txt-m: calc(var(--size-regular) * 1.25);
+  --size-txt-sm: calc(var(--size-regular) * 0.75);
+
+  --padding-btn-l: 1em 3em;
+  --padding-btn-m: 0.5em 1.5em;
+  --padding-container: 1rem;
+
+  @media screen and (min-width: 768px) {
+    --size-txt-xl: calc(var(--size-regular) * 1.75 + 2vw);
+    --size-txt-l: calc(var(--size-regular) * 2.5);
+    --size-txt-m: calc(var(--size-regular) * 1.75);
+    --size-txt-sm: calc(var(--size-regular) * 0.75);
+  }
+}
