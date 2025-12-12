@@ -1,7 +1,8 @@
 <template>
   <section-wrapper id="facts" title="Quick Intro">
     <p class="intro">
-      I am a full-stack developer, currently working at a senior position at Remind GmbH, where I am deeply involved
+      I am a full-stack developer from Lübeck in the North of Germany. Currently I am working at a senior position at
+      Remind GmbH, where I am deeply involved
       across the entire development stack (frontend, backend, DevOps).
     </p>
     <p>
