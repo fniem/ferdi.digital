@@ -58,7 +58,7 @@ jobs:
             echo "--- 3. Gebaute Anwendung bereitstellen ---"
             mkdir -p "$(dirname "$LIVE_DIR")"
             rm -rf "$LIVE_DIR/.output"
-            mv "$BUILD_DIR/.output" "$BUILD_DIR/ecosystem.config.cjs" "$LIVE_DIR"
+            mv "$BUILD_DIR/.output" "$LIVE_DIR"
 
             echo "--- 4. Temporäres Build-Verzeichnis bereinigen ---"
             rm -rf "$BUILD_DIR"
