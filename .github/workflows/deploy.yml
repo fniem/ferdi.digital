@@ -41,7 +41,6 @@ jobs:
             LIVE_DIR="/home/${{ secrets.DEPLOY_USER }}/projects/ferdi.digital"
             REPO_URL="git@github.com:fniem/ferdi.digital.git"
             BUILD_DIR="/tmp/ferdi.digital-build-$(date +%s)"
-            PM2_APP_NAME="ferdi.digital"
 
             # Bun-Umgebung laden
             export BUN_INSTALL="$HOME/.bun"
@@ -65,7 +64,7 @@ jobs:
 
             echo "--- 5. Anwendung mit PM2 neu starten ---"
             cd "$LIVE_DIR"
-            pm2 restart ecosystem.config.cjs || pm2 start ecosystem.config.cjs --name "$PM2_APP_NAME"
+            pm2 restart ecosystem.config.cjs
 
             echo "Deployment erfolgreich abgeschlossen!"
           EOF
