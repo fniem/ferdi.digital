@@ -32,7 +32,7 @@
           <input id="phone" v-model="form.phone" type="phone" name="phone">
         </div>
         <div class="label-wrapper">
-          <label for="name">Your message</label>
+          <label for="message">Your message</label>
           <textarea id="message" v-model="form.message" name="message" rows="5" required />
         </div>
         <div class="privacy-wrapper">
@@ -149,10 +149,10 @@ async function sendMail() {
 #contact {
   .contact-wrapper {
     display: grid;
+    gap: 4rem;
 
     @media screen and (min-width: 768px) {
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
     }
   }
 
