@@ -12,7 +12,7 @@
             <icon name="mi:email" />
             <span>moin@ferdi.digital</span>
           </a>
-          <a href="https://linkedin.com/fniem" target="_blank" class="contact-option">
+          <a href="https://linkedin.com/in/fniem" target="_blank" class="contact-option">
             <icon name="ri:linkedin-fill" />
             <span>linkedin.com/in/fniem</span>
           </a>
