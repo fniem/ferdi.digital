@@ -1,5 +1,5 @@
 <template>
-  <section-wrapper id="skills" title="My stack and skills">
+  <section-wrapper id="skills" title="My technology stack and development skills">
     <p class="intro">
       My entire career as a developer has been shaped not only by strong motivation and determination, but also by an
       insatiable curiosity for knowledge. Deepening my practical skills and remaining open to new ideas is essential to
@@ -101,7 +101,7 @@ const skills = [
 #skills {
   h4 {
     font-size: var(--size-txt-m);
-    color: var(--clr-blue-300);
+    color: var(--clr-accent);
   }
 
   .categories-wrapper {

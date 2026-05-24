@@ -166,8 +166,8 @@ async function sendMail() {
     flex-wrap: wrap;
 
     .contact-option {
-      background-color: var(--clr-blue-300);
-      color: var(--clr-blue-900);
+      background-color: var(--clr-accent);
+      color: var(--clr-primary);
       text-decoration: none;
 
       padding: 1rem;
@@ -199,7 +199,7 @@ async function sendMail() {
         --padding-left: .5rem;
         --border-left: 2px;
 
-        background-color: var(--clr-blue-900);
+        background-color: var(--clr-primary);
 
         display: inline-block;
         padding: .25rem .75rem;
@@ -215,7 +215,7 @@ async function sendMail() {
         &:has(+textarea:focus),
         &:has(+textarea:hover) {
           background-color: white;
-          color: var(--clr-blue-900);
+          color: var(--clr-primary);
         }
       }
 
@@ -225,7 +225,7 @@ async function sendMail() {
       #phone,
       #message {
         font-size: var(--size-txt-m);
-        background-color: var(--clr-blue-300);
+        background-color: var(--clr-accent);
         font-family: inherit;
 
         padding: 1rem .5rem;
@@ -262,12 +262,12 @@ async function sendMail() {
       background-color: transparent;
       color: white;
 
-      border: 2px solid var(--clr-blue-300);
+      border: 2px solid var(--clr-accent);
       padding: var(--padding-btn-m);
 
       &:hover:not(:disabled) {
-        background-color: var(--clr-blue-300);
-        color: var(--clr-blue-900);
+        background-color: var(--clr-accent);
+        color: var(--clr-primary);
       }
 
       &:disabled {

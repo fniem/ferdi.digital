@@ -69,8 +69,8 @@ const handleMouseLeave = (event, index) => {
 
 <style scoped>
 div {
-  background-color: var(--clr-blue-300);
-  color: var(--clr-blue-900);
+  background-color: var(--clr-accent);
+  color: var(--clr-primary);
 
   padding-inline: 2em;
   height: 100%;

@@ -1,17 +1,18 @@
 <template>
   <header class="max-w">
-    <h1>
+    <span>
       <nuxt-link to="/">
         Ferdinand Niemann
       </nuxt-link>
-    </h1>
+    </span>
     <div class="buttons-wrapper">
       <a href="https://github.com/moinferdi" target="_blank" class="btn social" :class="{ 'social-toggled': navOpen }">
         <span>
           <icon name="ri:github-line" />
         </span>
       </a>
-      <a href="https://linkedin.com/in/moinferdi" target="_blank" class="btn social" :class="{ 'social-toggled': navOpen }">
+      <a href="https://linkedin.com/in/moinferdi" target="_blank" class="btn social"
+        :class="{ 'social-toggled': navOpen }">
         <span>
           <icon name="ri:linkedin-line" />
         </span>
@@ -43,7 +44,7 @@ header {
   isolation: isolate;
   z-index: 4;
 
-  h1 {
+  span:has(a) {
     text-transform: uppercase;
     font-weight: 900;
     position: relative;
@@ -72,8 +73,8 @@ header {
 
     .btn {
       font-size: var(--size-txt-l);
-      background-color: var(--clr-blue-300);
-      color: var(--clr-blue-900);
+      background-color: var(--clr-accent);
+      color: var(--clr-primary);
 
       width: 3.25rem;
       aspect-ratio: 1;
@@ -85,7 +86,7 @@ header {
 
       &.social {
         background-color: transparent;
-        border-color: var(--clr-blue-300);
+        border-color: var(--clr-accent);
 
         color: white;
 
@@ -94,14 +95,14 @@ header {
         }
 
         &.social-toggled {
-          color: var(--clr-blue-900);
+          color: var(--clr-primary);
         }
       }
 
 
       &:not(.outline):hover {
         background-color: white;
-        color: var(--clr-blue-900);
+        color: var(--clr-primary);
       }
 
       >span {

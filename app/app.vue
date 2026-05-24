@@ -79,7 +79,7 @@ main {
 }
 
 .overlay {
-  background-color: var(--clr-blue-900);
+  background-color: var(--clr-primary);
 
   opacity: .75;
 

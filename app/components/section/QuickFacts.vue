@@ -1,25 +1,39 @@
 <template>
-  <section-wrapper id="facts" title="Quick Intro">
+  <section-wrapper id="facts">
+    <div>
+      <div v-for="{ title, description } in facts" :key="title" class="card">
+        <span class="card-title">{{ title }}</span>
+        <span class="card-description">{{ description }}</span>
+      </div>
+    </div>
     <p class="intro">
       I am a full-stack developer from Lübeck in the North of Germany. Currently I am working at a senior position at
       Remind GmbH, where I am deeply involved
-      across the entire development stack (frontend, backend, DevOps).
+      across the entire development stack to create and improve enterprise-level websites and apps.
     </p>
-    <p>
-      Before transitioning into tech, I spent eight years working in retail. But even during that time, programming
-      was more than just a hobby; it was something I always came back to, whether building small projects or exploring
-      new technologies. Eventually, I decided to turn that passion into a career, and I haven't looked back since.
-    </p>
-    <p>
-      Today, I have the honor to contribute to a wide range of projects, from lightweight websites for small
-      businesses to
-      enterprise-grade web applications used by large, multi-million euro companies.
-    </p>
+
     <div class="cta-wrapper">
       <link-cta to="/work" label="Have a look at my work" />
     </div>
   </section-wrapper>
 </template>
+
+<script lang="ts" setup>
+const facts = [
+  {
+    title: "5+",
+    description: "years of working as a developer professionally"
+  },
+  {
+    title: "10+",
+    description: "core technologies mastered and actively used in production"
+  },
+  {
+    title: "100%",
+    description: "automated deployments and containerized environments"
+  }
+]
+</script>
 
 <style scoped>
 #facts {
@@ -28,13 +42,29 @@
     margin-inline: auto;
   }
 
-  h3 {
-    @media screen and (min-width: 768px) {
-      font-size: var(--size-txt-xl);
-      font-style: italic;
-      color: var(--clr-blue-300);
+  div:has(>.card) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    padding-inline: 6rem;
+    margin-top: 10rem;
+  }
 
-      margin-bottom: 1em;
+  .card {
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 2px solid var(--clr-secondary);
+    padding: 1.5rem 4.5rem;
+
+    .card-title {
+      font-size: 2rem;
+    }
+
+    .card-description {
+      color: var(--clr-secondary);
     }
   }
 

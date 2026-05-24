@@ -1,7 +1,7 @@
 <template>
-  <h2>
+  <h1 v-if="title">
     {{ title }}
-  </h2>
+  </h1>
   <div :id="id" class="section-wrapper">
     <div class="container section">
       <!-- eslint-disable-next-line vue/html-self-closing -->
@@ -12,16 +12,16 @@
 
 <script setup lang="ts">
 defineProps<{
-  title: string
+  title?: string
   id?: string
 }>()
 </script>
 
 <style>
-h2 {
+h1 {
   font-size: var(--size-txt-xl);
   font-style: italic;
-  color: var(--clr-blue-300);
+  color: var(--clr-accent);
 
   padding-inline: 2rem;
   margin-top: 2rem;

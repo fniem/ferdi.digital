@@ -2,10 +2,11 @@
   <div id="home">
     <div class="hero-wrapper">
       <div class="hero container">
-        <nuxt-img src="/images/profile.jpg" format="webp" loading="eager" preload fetchpriority="high" sizes="xs:90vw sm:80vw md:400px lg:600px xl:1000px" />
-        <h2>Moin! I'm a developer and I <span> center divs with ease</span>.</h2>
+        <nuxt-img src="/images/profile.jpg" format="webp" loading="eager" preload fetchpriority="high"
+          sizes="xs:90vw sm:80vw md:400px lg:600px xl:1000px" />
+        <h1>Moin! I am Ferdi, a developer from Lübeck and <span>I exit vim like a pro</span>.</h1>
         <div class="cta-wrapper">
-          <link-cta to="#facts" label="Find out more" />
+          <link-cta to="#facts" label="Find out more" icon-name="ri:arrow-down-line" />
           <link-cta to="/contact" label="Get in touch" type="outline" />
         </div>
       </div>
@@ -32,40 +33,33 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-block: var(--margin-block);
-
-  @media screen and (min-width: 768px) {
-    --margin-block: calc(16rem + 5vw);
-
-    position: relative;
-  }
 
   img {
     width: 75%;
     aspect-ratio: 1;
     object-fit: cover;
-
-    position: absolute;
-    top: calc(var(--margin-block) / -1.5);
-    z-index: -1;
+    margin-top: 4rem;
 
     @media screen and (min-width: 768px) {
       width: 33%;
     }
   }
 
-  h2 {
+  h1 {
     font-size: var(--size-txt-xl);
     text-align: center;
     margin-block: 2.5rem;
+    font-style: normal;
+    color: white;
 
     @media screen and (min-width: 768px) {
       margin-inline: auto;
       width: 60%;
+      margin-top: -12rem;
     }
 
     span {
-      color: var(--clr-blue-300);
+      color: var(--clr-accent);
       font-weight: 700;
       font-style: italic;
     }
@@ -80,11 +74,11 @@
     }
 
     a {
-      background-color: var(--clr-blue-300);
+      background-color: var(--clr-accent);
       text-decoration: none;
-      color: var(--clr-blue-900);
+      color: var(--clr-primary);
       padding: var(--padding-btn-l);
-      border: 2px solid var(--clr-blue-300);
+      border: 2px solid var(--clr-accent);
       font-size: var(--size-txt-sm);
 
       @media screen and (min-width: 768px) {
@@ -93,16 +87,16 @@
 
       &:hover {
         background-color: transparent;
-        color: var(--clr-blue-300);
+        color: var(--clr-accent);
       }
 
       &.outline {
         background-color: transparent;
-        color: var(--clr-blue-300);
+        color: var(--clr-accent);
 
         &:hover {
-          background-color: var(--clr-blue-300);
-          color: var(--clr-blue-900);
+          background-color: var(--clr-accent);
+          color: var(--clr-primary);
         }
       }
     }
