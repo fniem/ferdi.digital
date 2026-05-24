@@ -1,9 +1,10 @@
 :root {
-  --clr-blue-900: #0b132b;
+  --clr-primary: #25283d;
   --clr-blue-800: #1c2541;
   --clr-blue-500: #3a506b;
   --clr-blue-400: #5bc0be;
-  --clr-blue-300: #6fffe9;
+  --clr-accent: #b33f62;
+  --clr-secondary: #4e8098;
 
   --size-regular: 1rem;
   --size-txt-xl: calc(var(--size-regular) * 2);

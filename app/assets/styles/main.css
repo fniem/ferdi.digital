@@ -9,7 +9,7 @@ main {
 }
 
 body {
-  background-color: var(--clr-blue-900);
+  background-color: var(--clr-primary);
   color: white;
   font-family: "Victor Mono";
 
