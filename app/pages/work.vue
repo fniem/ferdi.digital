@@ -1,22 +1,34 @@
 <template>
-  <section-wrapper id="work" title="Work">
+  <section-wrapper id="work" title="Websites and apps I created">
     <p class="intro">
-      Let me introduce you to a small selection of my recent works and projects. I am always up for new challenges and
+      Let me introduce you to a small selection of my recent (private) works and projects. I am always up for new
+      challenges and
       ideas. So if you need a helping hand as a developer for your app or website, feel free to <nuxt-link
         to="/contact">get in touch with me</nuxt-link>.
     </p>
     <div v-for="(project, index) in projectsData" :key="project.title" class="project-wrapper"
       :class="{ 'last-el': index === projectsData.length - 1 }">
-      <div class="project-wrapper__screenshots">
-        <nuxt-img :src="project.images[project.imgIndex]" format="webp" />
+      <div class="project-wrapper__screenshots" :class="{ 'is-mobile': project.isMobile }">
+        <div class="img-frame">
+          <div class="phone-dynamic-island"></div>
+          <Transition :name="`slide-${project.slideDirection}`" mode="out-in">
+            <nuxt-img :key="`${index}-${project.imgIndex}-${project.isMobile}`"
+              :src="project.isMobile ? project.mobile[project.imgIndex] : project.desktop[project.imgIndex]"
+              format="webp" />
+          </Transition>
+          <div class="phone-home-indicator"></div>
+        </div>
         <div class="img-controls">
+          <button class="img-control toggle-view" @click="toggleMobile(index)"
+            :title="project.isMobile ? 'Switch to desktop view' : 'Switch to mobile view'">
+            <icon :name="project.isMobile ? 'ri:computer-line' : 'ri:smartphone-line'" />
+          </button>
           <button class="img-control right" @click="getElement(index)">
-            <icon name="mi:chevron-right" />
+            <icon name="ri:arrow-right-s-line" />
           </button>
           <button class="img-control left" @click="getElement(index, 'previous')">
-            <icon name="mi:chevron-left" />
+            <icon name="ri:arrow-left-s-line" />
           </button>
-
         </div>
       </div>
       <div class="project-wrapper__info">
@@ -43,11 +55,19 @@
 <script setup lang="ts">
 const projectsData = ref([
   {
-    images: [
-      '/images/tagesmutter-ratzeburg_screenshot-desktop.png',
-      '/images/tagesmutter-ratzeburg_screenshot-mobile.png'
+    desktop: [
+      '/images/projects/tagesmutter-ratzeburg/desktop/tagesmutter-ratzeburg-1.png',
+      '/images/projects/tagesmutter-ratzeburg/desktop/tagesmutter-ratzeburg-2.png',
+      '/images/projects/tagesmutter-ratzeburg/desktop/tagesmutter-ratzeburg-3.png',
+    ],
+    mobile: [
+      '/images/projects/tagesmutter-ratzeburg/mobile/tagesmutter-ratzeburg-1.webp',
+      '/images/projects/tagesmutter-ratzeburg/mobile/tagesmutter-ratzeburg-2.webp',
+      '/images/projects/tagesmutter-ratzeburg/mobile/tagesmutter-ratzeburg-3.webp',
     ],
     imgIndex: 0,
+    isMobile: false,
+    slideDirection: 'next',
     title: 'Tagesmutter Ratzeburg (2025)',
     link: 'https://tagesmutter-ratzeburg.de',
     github: 'https://github.com/fniem/tagesmutter-ratzeburg.de',
@@ -55,10 +75,17 @@ const projectsData = ref([
     tools: ["Figma", "Nuxt 4", "TailwindCSS", "TypeScript", "GitHub", "GitHub Actions", "Ubuntu"]
   },
   {
-    images: [
-      '/images/ludwigs-tanzwelt_screenshot-desktop.png',
+    desktop: [
+      '/images/projects/ludwigs-tanzwelt/desktop/ludwigs-tanzwelt-1.webp',
+      '/images/projects/ludwigs-tanzwelt/desktop/ludwigs-tanzwelt-2.webp',
+    ],
+    mobile: [
+      '/images/projects/ludwigs-tanzwelt/mobile/ludwigs-tanzwelt-1.webp',
+      '/images/projects/ludwigs-tanzwelt/mobile/ludwigs-tanzwelt-2.webp',
     ],
     imgIndex: 0,
+    isMobile: false,
+    slideDirection: 'next',
     title: 'Ludwigs Tanzwelt (2024)',
     link: 'https://ludwigs-tanzwelt.de',
     github: 'https://github.com/fniem/ludwigs-tanzwelt.de',
@@ -66,13 +93,17 @@ const projectsData = ref([
     tools: ["Figma", "Nuxt 3", "Directus", "Docker", "TailwindCSS", "TypeScript", "GitHub", "GitHub Actions", "Ubuntu"]
   },
   {
-    images: [
-      '/images/nora-warschewski_screenshot-desktop-1.png',
-      '/images/nora-warschewski_screenshot-mobile-1.png',
-      '/images/nora-warschewski_screenshot-desktop-2.png',
-      '/images/nora-warschewski_screenshot-mobile-2.png',
+    desktop: [
+      '/images/projects/nora-warschewski/desktop/nora-warschewski-1.webp',
+      '/images/projects/nora-warschewski/desktop/nora-warschewski-2.webp',
+    ],
+    mobile: [
+      '/images/projects/nora-warschewski/mobile/nora-warschewski-1.webp',
+      '/images/projects/nora-warschewski/mobile/nora-warschewski-2.webp',
     ],
     imgIndex: 0,
+    isMobile: false,
+    slideDirection: 'next',
     title: 'Nora Warschewski (2022)',
     link: 'https://fniem.github.io/nora-warschewski',
     github: 'https://github.com/fniem/nora-warschewski',
@@ -82,24 +113,31 @@ const projectsData = ref([
 ])
 
 function getElement(index: number, direction = "next") {
-  const currentElement = projectsData.value[index]
+  const project = projectsData.value[index]
+  if (!project) return
 
-  if (!currentElement) return
+  project.slideDirection = direction
 
-  const currentIndex = currentElement.imgIndex;
-  const lastIndex = currentElement.images.length - 1
-  const isLastElement = currentIndex === lastIndex
-  const isFirstElement = currentIndex === 0
+  const images = project.isMobile ? project.mobile : project.desktop
+  const lastIndex = images.length - 1
 
   if (direction !== 'next') {
-    if (isFirstElement) return currentElement.imgIndex = lastIndex
-
-    return currentElement.imgIndex -= 1
+    project.imgIndex = project.imgIndex === 0 ? lastIndex : project.imgIndex - 1
+  } else {
+    project.imgIndex = project.imgIndex === lastIndex ? 0 : project.imgIndex + 1
   }
+}
 
-  if (isLastElement) return currentElement.imgIndex = 0
+function toggleMobile(index: number) {
+  const project = projectsData.value[index]
+  if (!project) return
 
-  return currentElement.imgIndex += 1
+  project.isMobile = !project.isMobile
+
+  const newImages = project.isMobile ? project.mobile : project.desktop
+  if (project.imgIndex >= newImages.length) {
+    project.imgIndex = 0
+  }
 }
 </script>
 
@@ -132,11 +170,72 @@ function getElement(index: number, direction = "next") {
     justify-content: center;
     position: relative;
 
-    img {
-      height: 100%;
+    .img-frame {
       width: 100%;
-      object-fit: contain;
-      margin-inline: auto;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: max-width 0.4s ease, border-radius 0.4s ease,
+        border-color 0.4s ease, padding 0.4s ease, background-color 0.4s ease;
+      max-width: 100%;
+      border-radius: 0;
+      border: 2px solid transparent;
+
+      img {
+        flex: 1;
+        min-height: 0;
+        width: 100%;
+        object-fit: contain;
+      }
+
+      .phone-dynamic-island {
+        width: 80px;
+        height: 0;
+        opacity: 0;
+        border-radius: 999px;
+        background-color: var(--clr-primary);
+        flex-shrink: 0;
+        transition: height 0.4s ease, opacity 0.4s ease, margin-bottom 0.4s ease;
+      }
+
+      .phone-home-indicator {
+        width: 80px;
+        height: 0;
+        opacity: 0;
+        border-radius: 999px;
+        background-color: var(--clr-accent);
+        flex-shrink: 0;
+        transition: height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
+      }
+    }
+
+    &.is-mobile .img-frame {
+      max-width: 260px;
+      border-radius: 2rem;
+      border-color: var(--clr-accent);
+      padding: 0.75rem 0.25rem;
+      background-color: white;
+
+      img {
+        border-radius: .25rem;
+        object-fit: cover;
+        object-position: top center;
+      }
+
+      .phone-dynamic-island {
+        height: 22px;
+        opacity: 1;
+        margin-bottom: 0.5rem;
+      }
+
+      .phone-home-indicator {
+        height: 4px;
+        opacity: 1;
+        margin-top: 0.5rem;
+      }
     }
 
     .img-controls {
@@ -150,7 +249,7 @@ function getElement(index: number, direction = "next") {
       transform: translateY(-50%);
 
       .img-control {
-        background-color: var(--clr-blue-300);
+        background-color: var(--clr-accent);
         font-size: var(--size-txt-m);
 
         display: flex;
@@ -169,7 +268,7 @@ function getElement(index: number, direction = "next") {
       margin-top: 2rem;
 
       h4 {
-        color: var(--clr-blue-300);
+        color: var(--clr-accent);
         font-size: var(--size-txt-m);
       }
 
@@ -193,8 +292,8 @@ function getElement(index: number, direction = "next") {
         gap: 1rem;
 
         .tool {
-          background-color: var(--clr-blue-500);
-          color: var(--clr-blue-900);
+          background-color: var(--clr-secondary);
+          color: var(--clr-white);
 
           display: inline-block;
           padding: .25em .75em;
@@ -202,5 +301,32 @@ function getElement(index: number, direction = "next") {
       }
     }
   }
+}
+
+.slide-next-enter-active,
+.slide-next-leave-active,
+.slide-prev-enter-active,
+.slide-prev-leave-active {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.slide-next-enter-from {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.slide-next-leave-to {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.slide-prev-enter-from {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.slide-prev-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
 }
 </style>
