@@ -44,10 +44,16 @@ const facts = [
 
   div:has(>.card) {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 1rem;
-    padding-inline: 6rem;
-    margin-top: 10rem;
+    padding-inline: 0;
+    margin-top: 3rem;
+
+    @media screen and (min-width: 768px) {
+      grid-template-columns: 1fr 1fr 1fr;
+      padding-inline: 2rem;
+      margin-top: 10rem;
+    }
   }
 
   .card {
@@ -55,12 +61,21 @@ const facts = [
 
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
     border: 2px solid var(--clr-secondary);
-    padding: 1.5rem 4.5rem;
+    padding: 1.25rem 1.5rem;
+
+    @media screen and (min-width: 768px) {
+      gap: 1rem;
+      padding: 1.5rem 4.5rem;
+    }
 
     .card-title {
-      font-size: 2rem;
+      font-size: 1.5rem;
+
+      @media screen and (min-width: 768px) {
+        font-size: 2rem;
+      }
     }
 
     .card-description {
