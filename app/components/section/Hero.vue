@@ -49,9 +49,12 @@
     font-size: var(--size-txt-xl);
     text-align: center;
     margin-block: 2.5rem;
-    margin-top: -34vw;
     font-style: normal;
     color: white;
+
+    @media screen and (max-width: 767px) {
+      margin-top: -34vw;
+    }
 
     @media screen and (min-width: 768px) {
       margin-inline: auto;
