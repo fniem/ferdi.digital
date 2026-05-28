@@ -170,6 +170,12 @@ function toggleMobile(index: number) {
     justify-content: center;
     position: relative;
 
+    @media screen and (max-width: 767px) {
+      &.is-mobile {
+        aspect-ratio: 9 / 16;
+      }
+    }
+
     .img-frame {
       width: 100%;
       height: 100%;
