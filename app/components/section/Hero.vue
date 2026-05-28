@@ -49,6 +49,7 @@
     font-size: var(--size-txt-xl);
     text-align: center;
     margin-block: 2.5rem;
+    margin-top: -34vw;
     font-style: normal;
     color: white;
 
