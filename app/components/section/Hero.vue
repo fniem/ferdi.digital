@@ -41,6 +41,10 @@
     margin-top: 4rem;
 
     @media screen and (min-width: 768px) {
+      width: 50%;
+    }
+
+    @media screen and (min-width: 1024px) {
       width: 33%;
     }
   }
@@ -59,6 +63,10 @@
     @media screen and (min-width: 768px) {
       margin-inline: auto;
       width: 60%;
+      margin-top: -8rem;
+    }
+
+    @media screen and (min-width: 1024px) {
       margin-top: -12rem;
     }
 

@@ -67,6 +67,10 @@ const facts = [
 
     @media screen and (min-width: 768px) {
       gap: 1rem;
+      padding: 1.5rem 2rem;
+    }
+
+    @media screen and (min-width: 1024px) {
       padding: 1.5rem 4.5rem;
     }
 
