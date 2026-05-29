@@ -74,6 +74,7 @@ div {
 
   padding-inline: 2em;
   height: 100%;
+  overflow-y: auto;
 
   display: grid;
   grid-template-rows: 1fr auto;
