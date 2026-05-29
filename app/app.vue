@@ -40,8 +40,8 @@ useHead({
         "name": "Ferdinand Niemann",
         "url": "https://ferdi.digital",
         "sameAs": [
-          "https://www.linkedin.com/in/fniem",
-          "https://github.com/fniem" 
+          "https://www.linkedin.com/in/moinferdi",
+          "https://github.com/moinferdi" 
         ],
         "jobTitle": "Full-Stack Developer",
         "worksFor": {

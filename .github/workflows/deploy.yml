@@ -39,7 +39,7 @@ jobs:
             set -e
 
             LIVE_DIR="/home/${{ secrets.DEPLOY_USER }}/projects/ferdi.digital"
-            REPO_URL="git@github.com:fniem/ferdi.digital.git"
+            REPO_URL="git@github.com:moinferdi/ferdi.digital.git"
             BUILD_DIR="/tmp/ferdi.digital-build-$(date +%s)"
 
             # Bun-Umgebung laden
