@@ -82,7 +82,7 @@ const skills = [
 
   {
     title: "AI Tools & Agents",
-    stack: ["ChatGPT", "Claude Sonnet 4", "GitHub Copilot Agent"]
+    stack: ["Codex", "Claude Code", "OpenCode", "n8n", "GitHub Copilot Agent"]
   },
 
   {
