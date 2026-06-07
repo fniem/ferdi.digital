@@ -71,7 +71,11 @@ function toggleFilter(cat: string) {
   if (showAllActive.value) {
     activeFilters.value = [cat];
   } else if (activeFilters.value.includes(cat)) {
-    activeFilters.value = activeFilters.value.filter(c => c !== cat);
+    if (activeFilters.value.length === 1) {
+      activeFilters.value = [...categoryTitles];
+    } else {
+      activeFilters.value = activeFilters.value.filter(c => c !== cat);
+    }
   } else {
     activeFilters.value = [...activeFilters.value, cat];
   }
