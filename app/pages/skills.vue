@@ -7,7 +7,6 @@
       over time for me, so that I can be a reliable and valuable team member others can always depend on.
     </p>
     <div class="filter-bar">
-      <p class="filter-hint">Filter by category: Click any to narrow down what's shown, or use <strong>Show all</strong> to see everything at once.</p>
       <div class="filter-scroll">
         <button :class="{ active: showAllActive }" @click="showAll">
           Show all
@@ -152,21 +151,15 @@ const skills = [
   }
 
   .filter-bar {
+    background-color: var(--clr-primary);
     margin-top: 3rem;
+    padding-block: 1rem;
+    position: sticky;
+    top: 0;
 
     @media screen and (min-width: 768px) {
       margin-top: 5rem;
-    }
-
-    .filter-hint {
-      margin-block: 0 0.5rem;
-      padding-inline: var(--padding-container);
-      font-size: var(--size-txt-sm);
-      color: var(--clr-blue-400);
-
-      @media screen and (min-width: 768px) {
-        padding-inline: 0;
-      }
+      position: static;
     }
 
     .filter-scroll {
@@ -186,10 +179,10 @@ const skills = [
           display: none;
         }
 
-        background:
-          linear-gradient(to right, var(--clr-primary) 20%, transparent 100%) left / var(--padding-container) 100% no-repeat,
-          linear-gradient(to left, var(--clr-primary) 20%, transparent 100%) right / var(--padding-container) 100% no-repeat;
-        background-attachment: local, local;
+        background: linear-gradient(to right, var(--clr-primary) 20%, transparent 100%) left / var(--padding-container) 100% no-repeat,
+        linear-gradient(to left, var(--clr-primary) 20%, transparent 100%) right / var(--padding-container) 100% no-repeat;
+        background-attachment: local,
+        local;
       }
     }
 
