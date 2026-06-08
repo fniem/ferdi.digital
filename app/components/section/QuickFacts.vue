@@ -7,9 +7,7 @@
       </div>
     </div>
     <p class="intro">
-      I am a full-stack developer from Lübeck in the North of Germany. Currently I am working at a senior position at
-      Remind GmbH, where I am deeply involved
-      across the entire development stack to create and improve enterprise-level websites and apps.
+      I am a senior full-stack developer based in Lübeck, Schleswig-Holstein, in the North of Germany. Currently I work at Remind GmbH, where I architect and build enterprise-level web applications and mobile apps across the entire development stack — from database design and backend APIs to modern frontends with Nuxt, Vue and TypeScript.
     </p>
 
     <div class="cta-wrapper">

@@ -12,12 +12,30 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
   ],
 
+  app: {
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+    },
+  },
+
   runtimeConfig: {
     public: {
       sitemap: {
         hostname: "https://ferdi.digital",
         gzip: true,
-        routes: ["/", "/work", "/contact", "/skills", "/imprint", "/privacy"],
+        defaults: {
+          changefreq: 'monthly',
+          priority: 0.5,
+        },
+        routes: [
+          { url: '/', changefreq: 'weekly', priority: 1.0 },
+          { url: '/work', changefreq: 'monthly', priority: 0.9 },
+          { url: '/skills', changefreq: 'monthly', priority: 0.8 },
+          { url: '/contact', changefreq: 'monthly', priority: 0.7 },
+          { url: '/legal', changefreq: 'yearly', priority: 0.3 },
+          { url: '/privacy', changefreq: 'yearly', priority: 0.3 },
+        ],
       },
     },
   },

@@ -1,5 +1,6 @@
 <template>
   <section-wrapper id="legal" title="Legal Notice / Impressum">
+    <h1 class="sr-only">Legal Notice / Impressum – Ferdinand Niemann, Lübeck</h1>
 
     <div>
       <article>
@@ -50,20 +51,41 @@
         bitten
         wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte
         umgehend entfernen. </p>
-      <p class="sr-only">Impressum von <a href=" https://impressum-generator.de"
-          rel="dofollow">Impressum-Generator.de</a>. Powered by <a href="https://www.kanzlei-hasselbach.de/"
+      <p class="sr-only">Impressum von <a href="https://impressum-generator.de"
+          rel="nofollow">Impressum-Generator.de</a>. Powered by <a href="https://www.kanzlei-hasselbach.de/"
           rel="nofollow">Franziska Hasselbach, Bonn</a>. </p>
     </div>
   </section-wrapper>
 </template>
 <script setup>
 useHead({
-  title: 'Legal Notice / Impressum - Ferdinand Niemann',
-  meta: [
+  title: 'Legal Notice / Impressum – Ferdinand Niemann',
+})
+
+useSeoMeta({
+  title: 'Legal Notice / Impressum – Ferdinand Niemann',
+  description: 'Legal notice and impressum of Ferdinand Niemann, full-stack developer from Lübeck. Contact information and legal disclaimers according to German law.',
+  ogTitle: 'Legal Notice / Impressum – Ferdinand Niemann',
+  ogDescription: 'Legal notice and impressum of Ferdinand Niemann, full-stack developer from Lübeck.',
+})
+
+useHead({
+  script: [
     {
-      name: 'description',
-      content: 'Legal notice and impressum of Ferdinand Niemann, developer portfolio. Contact information and legal disclaimers.'
-    }
-  ]
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ferdi.digital' },
+              { '@type': 'ListItem', position: 2, name: 'Legal Notice', item: 'https://ferdi.digital/legal' },
+            ],
+          },
+        ],
+      }),
+    },
+  ],
 })
 </script>

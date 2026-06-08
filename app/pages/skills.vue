@@ -1,35 +1,32 @@
 <template>
   <section-wrapper id="skills" title="My technology stack and development skills">
+    <h1 class="sr-only">Skills & Tech Stack – Full-Stack Developer Lübeck</h1>
     <p class="intro">
-      My entire career as a developer has been shaped not only by strong motivation and determination, but also by an
-      insatiable curiosity for knowledge. Deepening my practical skills and remaining open to new ideas is essential to
-      me. I quickly familiarize myself with new frameworks, technologies, and workflows using methods I have refined
-      over time for me, so that I can be a reliable and valuable team member others can always depend on.
+      As a full-stack developer with 5+ years of professional experience in Lübeck and northern Germany, I have built
+      deep expertise across the entire web development lifecycle. From responsive frontends with Nuxt and Vue to
+      scalable Node.js backends and Docker-based CI/CD pipelines — I quickly adapt to new technologies and deliver
+      production-ready solutions that teams can rely on.
     </p>
     <div class="filter-bar" role="group" aria-label="Filter skills by category">
       <div class="filter-scroll">
-        <button :class="{ active: showAllActive }" @click="showAll"
-          :aria-pressed="showAllActive ? 'true' : 'false'" aria-label="Show all skill categories">
+        <button :class="{ active: showAllActive }" @click="showAll" :aria-pressed="showAllActive ? 'true' : 'false'"
+          aria-label="Show all skill categories">
           Show all
         </button>
-        <button
-          v-for="cat in skillCategoryTitles"
-          :key="cat"
-          :class="{ active: activeFilters.includes(cat) && !showAllActive }"
-          @click="toggleFilter(cat)"
+        <button v-for="cat in skillCategoryTitles" :key="cat"
+          :class="{ active: activeFilters.includes(cat) && !showAllActive }" @click="toggleFilter(cat)"
           :aria-pressed="(activeFilters.includes(cat) && !showAllActive) ? 'true' : 'false'"
-          :aria-label="`Filter by ${cat}`"
-        >
+          :aria-label="`Filter by ${cat}`">
           {{ cat }}
         </button>
       </div>
     </div>
     <div class="categories-wrapper">
       <div v-for="category in filteredSkills" :key="category.title" class="skill-category">
-        <h4>{{ category.title }}</h4>
+        <h3>{{ category.title }}</h3>
         <template v-if="category?.categories">
           <div v-for="childCategory in category?.categories" :key="childCategory.title" class="category-wrapper">
-            <h5>{{ childCategory.title }}</h5>
+            <h4>{{ childCategory.title }}</h4>
             <div class="skills-wrapper">
               <span v-for="skill in childCategory.stack" :key="skill" class="skill">{{ skill }}</span>
             </div>
@@ -46,16 +43,50 @@
 </template>
 
 <script setup lang="ts">
-import { skillCategoryTitles } from "~/data/skills";
+import { skillCategoryTitles, skills } from "~/data/skills";
 
 useHead({
-  title: 'My Skills & Tech Stack - Ferdinand Niemann',
-  meta: [
+  title: 'Skills & Tech Stack – Ferdinand Niemann Full-Stack Developer',
+})
+
+useSeoMeta({
+  title: 'Skills & Tech Stack – Ferdinand Niemann Full-Stack Developer',
+  description: 'Full-stack developer tech stack: Nuxt, Vue, React, TypeScript, Node.js, PostgreSQL, Docker, CI/CD and more. Based in Lübeck, Germany with 5+ years of experience.',
+  ogTitle: 'Skills & Tech Stack – Ferdinand Niemann Full-Stack Developer',
+  ogDescription: 'Full-stack developer tech stack: Nuxt, Vue, React, TypeScript, Node.js, PostgreSQL, Docker, CI/CD and more.',
+})
+
+useHead({
+  script: [
     {
-      name: 'description',
-      content: 'Discover the diverse skill set and tech stack of Ferdinand Niemann, a full-stack developer specializing in modern web applications and innovative app solutions.'
-    }
-  ]
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ferdi.digital' },
+              { '@type': 'ListItem', position: 2, name: 'Skills', item: 'https://ferdi.digital/skills' },
+            ],
+          },
+          {
+            '@type': 'ItemList',
+            name: 'Technology Stack',
+            itemListElement: skills.map((cat, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              item: {
+                '@type': 'DefinedTerm',
+                name: cat.title,
+                description: cat.stack?.join(', ') || cat.categories?.flatMap(c => c.stack).join(', ') || '',
+              },
+            })),
+          },
+        ],
+      }),
+    },
+  ],
 })
 
 const { activeFilters, showAllActive, filteredSkills, showAll, toggleFilter } = useSkillFilter();
@@ -63,7 +94,7 @@ const { activeFilters, showAllActive, filteredSkills, showAll, toggleFilter } = 
 
 <style>
 #skills {
-  h4 {
+  h3 {
     font-size: var(--size-txt-m);
     color: var(--clr-accent);
   }
@@ -99,7 +130,8 @@ const { activeFilters, showAllActive, filteredSkills, showAll, toggleFilter } = 
 
         background: linear-gradient(to right, var(--clr-primary) 20%, transparent 100%) left / var(--padding-container) 100% no-repeat,
         linear-gradient(to left, var(--clr-primary) 20%, transparent 100%) right / var(--padding-container) 100% no-repeat;
-        background-attachment: local, local;
+        background-attachment: local,
+        local;
       }
     }
 
@@ -137,11 +169,11 @@ const { activeFilters, showAllActive, filteredSkills, showAll, toggleFilter } = 
       margin-top: 8rem;
     }
 
-    .skill-category + .skill-category {
+    .skill-category+.skill-category {
       margin-top: 4rem;
     }
 
-    h5 {
+    h4 {
       margin-block: 2rem 0;
     }
 

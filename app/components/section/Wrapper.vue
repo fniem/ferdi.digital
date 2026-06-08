@@ -1,7 +1,7 @@
 <template>
-  <h1 v-if="title" :id="title ? `section-title-${id}` : undefined">
+  <h2 v-if="title" :id="title ? `section-title-${id}` : undefined">
     {{ title }}
-  </h1>
+  </h2>
   <div :id="id" class="section-wrapper" role="region" :aria-labelledby="title ? `section-title-${id}` : undefined">
     <div class="container section">
       <!-- eslint-disable-next-line vue/html-self-closing -->
@@ -18,7 +18,7 @@ defineProps<{
 </script>
 
 <style>
-h1 {
+h2 {
   font-size: var(--size-txt-xl);
   font-style: italic;
   color: var(--clr-accent);

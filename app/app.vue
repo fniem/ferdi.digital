@@ -21,48 +21,112 @@
 </template>
 
 <script setup>
+const siteName = 'Ferdinand Niemann – Full-Stack Developer Lübeck'
+const siteDescription = 'Ferdinand Niemann is a senior full-stack developer based in Lübeck, Germany, specializing in modern web apps, Nuxt, TypeScript and cloud-native solutions.'
+const siteUrl = 'https://ferdi.digital'
+const siteImage = 'https://ferdi.digital/images/profile.jpg'
+
 useHead({
-  title: 'Ferdinand Niemann, Lübeck',
   htmlAttrs: {
     lang: 'en',
   },
-  meta: [
-    {
-      name: 'description',
-      content: 'I am Ferdinand Niemann, a passionate developer from Lübeck, specializing in modern web applications and innovative app solutions.'
-    }
+  link: [
+    { rel: 'canonical', href: siteUrl },
   ],
+})
+
+// Global OpenGraph / Twitter defaults – pages override title/description
+useSeoMeta({
+  title: siteName,
+  description: siteDescription,
+  ogTitle: siteName,
+  ogDescription: siteDescription,
+  ogType: 'website',
+  ogUrl: siteUrl,
+  ogImage: siteImage,
+  ogImageWidth: '1200',
+  ogImageHeight: '630',
+  ogSiteName: siteName,
+  ogLocale: 'en_DE',
+  twitterCard: 'summary_large_image',
+  twitterTitle: siteName,
+  twitterDescription: siteDescription,
+  twitterImage: siteImage,
+  author: 'Ferdinand Niemann',
+  themeColor: '#25283d',
+})
+
+useHead({
   script: [
     {
       type: 'application/ld+json',
       innerHTML: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Ferdinand Niemann",
-        "url": "https://ferdi.digital",
-        "sameAs": [
-          "https://www.linkedin.com/in/moinferdi",
-          "https://github.com/moinferdi" 
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'WebSite',
+            name: 'Ferdinand Niemann – Developer Portfolio',
+            url: siteUrl,
+            description: siteDescription,
+            inLanguage: 'en',
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: {
+                '@type': 'EntryPoint',
+                urlTemplate: `${siteUrl}/?s={search_term_string}`,
+              },
+              'query-input': 'required name=search_term_string',
+            },
+          },
+          {
+            '@type': 'Person',
+            '@id': `${siteUrl}/#person`,
+            name: 'Ferdinand Niemann',
+            givenName: 'Ferdinand',
+            familyName: 'Niemann',
+            url: siteUrl,
+            sameAs: [
+              'https://www.linkedin.com/in/moinferdi',
+              'https://github.com/moinferdi',
+            ],
+            jobTitle: 'Senior Full-Stack Developer',
+            worksFor: {
+              '@type': 'Organization',
+              name: 'Remind GmbH',
+              url: 'https://remind.de',
+            },
+            email: 'mailto:moin@ferdi.digital',
+            image: siteImage,
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Lübeck',
+              addressRegion: 'Schleswig-Holstein',
+              addressCountry: 'DE',
+            },
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: '53.8655',
+              longitude: '10.6866',
+            },
+            telephone: '+49 173 683 4611',
+            description: 'Senior full-stack developer from Lübeck (Germany) with 5+ years of professional experience in enterprise-level web applications, specializing in Nuxt, Vue, TypeScript, Node.js and cloud-native architectures.',
+            knowsAbout: [
+              'Web Development',
+              'Full-Stack Development',
+              'Nuxt.js',
+              'Vue.js',
+              'TypeScript',
+              'Node.js',
+              'TailwindCSS',
+              'DevOps',
+              'Docker',
+              'CI/CD',
+            ],
+          },
         ],
-        "jobTitle": "Full-Stack Developer",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Remind GmbH",
-          "url": "https://remind.de"
-        },
-        "email": "mailto:moin@ferdi.digital",
-        "image": "https://ferdi.digital/images/profile.jpg",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Lübeck",
-          "addressCountry": "DE"
-        },
-        "telephone": "+49 173 683 4611",
-        "description": "I am Ferdinand Niemann, a passionate developer from Lübeck, specializing in modern web applications and innovative app solutions.",
-        "knowsAbout": "Web Development, Full-Stack Development, Nuxt.js, TypeScript, TailwindCSS, DevOps",
-      })
-    }
-  ]
+      }),
+    },
+  ],
 })
 
 const navOpen = useState('nav')

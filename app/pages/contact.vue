@@ -1,12 +1,9 @@
 <template>
   <section-wrapper id="contact" title="Let's chat!">
+    <h1 class="sr-only">Contact Ferdinand Niemann – Full-Stack Developer in Lübeck</h1>
     <div class="contact-wrapper">
       <div>
-        <p>You have an interesting project I could help you with? You need a website? Whatever it is,
-          let's
-          get in touch! Either use one of the below contact options or just use my contact form. Either way, I'll try
-          and
-          get back to you as soon as possible.</p>
+        <p>You have an interesting project and need an experienced full-stack developer? Whether you are based in Lübeck, Hamburg, Schleswig-Holstein or anywhere in Germany — I am available for freelance web development, app projects and technical consulting. Reach out via email or the contact form below and I will get back to you as soon as possible.</p>
         <div class="contact-info-wrapper">
           <a href="mailto:moin@ferdi.digital" class="contact-option" aria-label="Send email to moin@ferdi.digital">
             <icon name="mi:email" />
@@ -64,29 +61,38 @@
 
 <script setup lang="ts">
 useHead({
-  title: 'Contact Me - Ferdinand Niemann',
-  meta: [
-    {
-      name: 'description',
-      content: 'Get in touch with Ferdinand Niemann for web development or app projects, collaborations, or inquiries.'
-    }
-  ],
+  title: 'Contact Me – Ferdinand Niemann Full-Stack Developer Lübeck',
+})
+
+useSeoMeta({
+  title: 'Contact Me – Ferdinand Niemann Full-Stack Developer Lübeck',
+  description: 'Hire Ferdinand Niemann, a senior full-stack developer from Lübeck (Germany). Available for freelance web development, Nuxt/Vue projects, and technical consulting. Get in touch via email or contact form.',
+  ogTitle: 'Contact Me – Ferdinand Niemann Full-Stack Developer Lübeck',
+  ogDescription: 'Hire a senior full-stack developer from Lübeck. Available for freelance web development, Nuxt/Vue projects and technical consulting.',
+})
+
+useHead({
   script: [
     {
       type: 'application/ld+json',
       innerHTML: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "ContactPage",
-        "mainEntity": {
-          "@type": "Person",
-          "name": "Ferdinand Niemann",
-          "email": "mailto:moin@ferdi.digital",
-          "telephone": "+49 173 683 4611",
-          "url": "https://ferdi.digital/contact"
-        }
-      })
-    }
-  ]
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ferdi.digital' },
+              { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://ferdi.digital/contact' },
+            ],
+          },
+          {
+            '@type': 'ContactPage',
+            mainEntity: { '@id': 'https://ferdi.digital/#person' },
+          },
+        ],
+      }),
+    },
+  ],
 })
 
 const { form, isLoading, successMessage, errorMessage, sendMail } = useContactForm();

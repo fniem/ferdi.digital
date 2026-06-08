@@ -1,5 +1,6 @@
 <template>
   <section-wrapper id="privacy" title="Privacy Notice / Datenschutzerklärung">
+    <h1 class="sr-only">Privacy Notice / Datenschutzerklärung – Ferdinand Niemann, Lübeck</h1>
     <div>
       <p>ferdi.digital freut sich sehr über Ihr Interesse an der angebotenen
         Betreuung. Datenschutz hat einen besonders hohen Stellenwert. Eine Nutzung dieser Internetseite ist
@@ -197,9 +198,10 @@
         oder ein Profiling. </p>
       <p>Diese Datenschutzerklärung wurde durch den Datenschutzerklärungs-Generator der DGD Deutsche
         Gesellschaft für Datenschutz GmbH, die als <a
-          href="https://dg-datenschutz.de/datenschutz-dienstleistungen/externer-datenschutzbeauftragter/">Externer
+          href="https://dg-datenschutz.de/datenschutz-dienstleistungen/externer-datenschutzbeauftragter/"
+          rel="nofollow">Externer
           Datenschutzbeauftragter Essen</a> tätig ist, in Kooperation mit den <a
-          href="https://www.wbs.legal/">Datenschutz Anwälten der Kanzlei WILDE BEUGER SOLMECKE |
+          href="https://www.wbs.legal/" rel="nofollow">Datenschutz Anwälten der Kanzlei WILDE BEUGER SOLMECKE |
           Rechtsanwälte</a> erstellt. </p>
     </div>
   </section-wrapper>
@@ -207,12 +209,33 @@
 
 <script setup lang="ts">
 useHead({
-  title: 'Privacy Notice / Datenschutzerklärung - Ferdinand Niemann',
-  meta: [
+  title: 'Privacy Notice / Datenschutzerklärung – Ferdinand Niemann',
+})
+
+useSeoMeta({
+  title: 'Privacy Notice / Datenschutzerklärung – Ferdinand Niemann',
+  description: 'Privacy notice and data protection information for ferdi.digital, the developer portfolio of Ferdinand Niemann from Lübeck. GDPR-compliant information about data processing and user rights.',
+  ogTitle: 'Privacy Notice / Datenschutzerklärung – Ferdinand Niemann',
+  ogDescription: 'Privacy notice and data protection information for ferdi.digital, the developer portfolio of Ferdinand Niemann.',
+})
+
+useHead({
+  script: [
     {
-      name: 'description',
-      content: 'Read the comprehensive Privacy Notice / Datenschutzerklärung of Ferdinand Niemann, outlining data protection practices and user rights.'
-    }
-  ]
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ferdi.digital' },
+              { '@type': 'ListItem', position: 2, name: 'Privacy Notice', item: 'https://ferdi.digital/privacy' },
+            ],
+          },
+        ],
+      }),
+    },
+  ],
 })
 </script>

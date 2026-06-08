@@ -35,10 +35,6 @@ ul {
   margin-block: 0;
 }
 
-h1 {
-  font-size: var(--size-txt-m);
-}
-
 button {
   cursor: pointer;
   border-color: transparent;
