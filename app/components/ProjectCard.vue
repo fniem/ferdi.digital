@@ -1,13 +1,14 @@
 <template>
   <div class="project-card" :class="{ 'last-el': isLast }">
     <div class="project-card__screenshots" :class="{ 'is-mobile': project.isMobile }">
-      <div class="img-frame">
+      <div class="img-frame" aria-live="polite">
         <div class="phone-dynamic-island"></div>
         <Transition :name="`slide-${project.slideDirection}`" mode="out-in">
           <nuxt-img
             :key="`${project.title}-${project.imgIndex}-${project.isMobile}`"
             :src="project.isMobile ? project.mobile[project.imgIndex] : project.desktop[project.imgIndex]"
             format="webp"
+            :alt="`Screenshot of ${project.title} (image ${project.imgIndex + 1})`"
           />
         </Transition>
         <div class="phone-home-indicator"></div>
@@ -18,22 +19,22 @@
           @click="$emit('toggleMobile')"
           :title="project.isMobile ? 'Switch to desktop view' : 'Switch to mobile view'"
         >
-          <icon :name="project.isMobile ? 'ri:computer-line' : 'ri:smartphone-line'" />
+          <icon :name="project.isMobile ? 'ri:computer-line' : 'ri:smartphone-line'" aria-hidden="true" />
         </button>
-        <button class="img-control right" @click="$emit('next')">
-          <icon name="ri:arrow-right-s-line" />
+        <button class="img-control right" @click="$emit('next')" aria-label="Next image">
+          <icon name="ri:arrow-right-s-line" aria-hidden="true" />
         </button>
-        <button class="img-control left" @click="$emit('prev')">
-          <icon name="ri:arrow-left-s-line" />
+        <button class="img-control left" @click="$emit('prev')" aria-label="Previous image">
+          <icon name="ri:arrow-left-s-line" aria-hidden="true" />
         </button>
       </div>
     </div>
     <div class="project-card__info">
       <header>
         <h4>{{ project.title }}</h4>
-        <a :href="project.link" target="__blank">{{ project.link }}</a>
+        <a :href="project.link" target="_blank" rel="noopener noreferrer">{{ project.link }}</a>
         <span> | </span>
-        <a :href="project.github">GitHub</a>
+        <a :href="project.github" :aria-label="`GitHub repository for ${project.title}`">GitHub</a>
       </header>
       <p>{{ project.description }}</p>
       <div class="project-card__info-tools">
@@ -183,6 +184,12 @@ defineEmits<{
 
 .img-controls .img-control:hover {
   background-color: white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card__screenshots .img-frame {
+    transition: none;
+  }
 }
 
 .project-card__info header {

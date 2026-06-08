@@ -8,11 +8,11 @@
           and
           get back to you as soon as possible.</p>
         <div class="contact-info-wrapper">
-          <a href="mailto:moin@ferdi.digital" target="_blank" class="contact-option">
+          <a href="mailto:moin@ferdi.digital" class="contact-option" aria-label="Send email to moin@ferdi.digital">
             <icon name="mi:email" />
             <span>moin@ferdi.digital</span>
           </a>
-          <a href="https://linkedin.com/in/moinferdi" target="_blank" class="contact-option">
+          <a href="https://linkedin.com/in/moinferdi" target="_blank" rel="noopener noreferrer" class="contact-option" aria-label="LinkedIn profile of Ferdinand Niemann">
             <icon name="ri:linkedin-fill" />
             <span>linkedin.com/in/moinferdi</span>
           </a>
@@ -21,23 +21,33 @@
       <form @submit.prevent="sendMail">
         <div class="label-wrapper">
           <label for="name">Your name</label>
-          <input id="name" v-model="form.name" type="text" name="name" required>
-          <input id="last-name" v-model="form.honeypot" type="text" name="last-name" autocomplete="off" tabindex="-1">
+          <input id="name" v-model="form.name" type="text" name="name" required
+            aria-required="true"
+            :aria-invalid="!!errorMessage"
+            :aria-describedby="errorMessage ? 'form-error' : undefined" />
+          <input id="last-name" v-model="form.honeypot" type="text" name="last-name" autocomplete="off" tabindex="-1" aria-hidden="true" />
         </div>
         <div class="label-wrapper">
           <label for="mail">Your email address</label>
-          <input id="mail" v-model="form.mail" type="email" name="mail" required>
+          <input id="mail" v-model="form.mail" type="email" name="mail" required
+            aria-required="true"
+            :aria-invalid="!!errorMessage"
+            :aria-describedby="errorMessage ? 'form-error' : undefined" />
         </div>
         <div class="label-wrapper">
           <label for="phone">Your phone number (optional)</label>
-          <input id="phone" v-model="form.phone" type="phone" name="phone">
+          <input id="phone" v-model="form.phone" type="tel" name="phone" />
         </div>
         <div class="label-wrapper">
           <label for="message">Your message</label>
-          <textarea id="message" v-model="form.message" name="message" rows="5" required />
+          <textarea id="message" v-model="form.message" name="message" rows="5" required
+            aria-required="true"
+            :aria-invalid="!!errorMessage"
+            :aria-describedby="errorMessage ? 'form-error' : undefined" />
         </div>
         <div class="privacy-wrapper">
-          <input id="privacy-check" v-model="form.privacyCheck" type="checkbox" name="privacy-check" required />
+          <input id="privacy-check" v-model="form.privacyCheck" type="checkbox" name="privacy-check" required
+            aria-required="true" />
           <label for="privacy-check">I agree that my data is stored and processed to answer my request. <nuxt-link
               to="/privacy">
               (See Privacy
@@ -46,7 +56,7 @@
         </div>
         <button :disabled="isLoading">{{ isLoading ? 'Sending...' : 'Send' }}</button>
         <FormMessage :message="successMessage" type="success" />
-        <FormMessage :message="errorMessage" type="error" />
+        <FormMessage id="form-error" :message="errorMessage" type="error" />
       </form>
     </div>
   </section-wrapper>

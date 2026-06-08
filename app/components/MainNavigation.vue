@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav :class="{ 'nav-open': navOpen }" role="navigation">
+    <nav :class="{ 'nav-open': navOpen }" role="navigation" aria-label="Main navigation" id="main-navigation">
       <ul>
         <li v-for="(link, index) in links" :key="link" @mouseenter="handleMouseEnter($event, index)"
           @mouseleave="handleMouseLeave($event, index)">
@@ -11,7 +11,7 @@
         </li>
       </ul>
     </nav>
-    <nav class="legal">
+    <nav class="legal" aria-label="Legal links">
       <ul>
         <li>
           <nuxt-link to="/legal" @click="navOpen = false">
@@ -130,6 +130,12 @@ div {
       transform: scaleY(0);
       transition: transform 0.3s ease;
       z-index: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .link-background {
+        transition: none;
+      }
     }
 
     .link-text {

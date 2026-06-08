@@ -1,8 +1,8 @@
 <template>
-  <h1 v-if="title">
+  <h1 v-if="title" :id="title ? `section-title-${id}` : undefined">
     {{ title }}
   </h1>
-  <div :id="id" class="section-wrapper">
+  <div :id="id" class="section-wrapper" role="region" :aria-labelledby="title ? `section-title-${id}` : undefined">
     <div class="container section">
       <!-- eslint-disable-next-line vue/html-self-closing -->
       <slot></slot>

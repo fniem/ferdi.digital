@@ -1,9 +1,10 @@
 <template>
   <div class="app">
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
     <page-header />
     <transition name="overlay">
       <!-- eslint-disable-next-line vue/html-self-closing -->
-      <div v-if="navOpen" class="overlay" @click="navOpen = false"></div>
+      <div v-if="navOpen" class="overlay" role="presentation" aria-hidden="true" @click="navOpen = false"></div>
     </transition>
     <transition name="nav">
       <div v-if="navOpen" class="nav-wrapper" :aria-hidden="!navOpen">
@@ -11,7 +12,7 @@
       </div>
     </transition>
     <nuxt-route-announcer />
-    <main>
+    <main id="main-content">
       <div class="max-w">
         <nuxt-page />
       </div>
@@ -34,7 +35,7 @@ useHead({
   script: [
     {
       type: 'application/ld+json',
-      children: `{
+      innerHTML: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Ferdinand Niemann",
@@ -58,8 +59,8 @@ useHead({
         },
         "telephone": "+49 173 683 4611",
         "description": "I am Ferdinand Niemann, a passionate developer from Lübeck, specializing in modern web applications and innovative app solutions.",
-        "knowsAbout": "Web Development, Full-Stack Development, Nuxt.js, TypeScript, TailwindCSS, DevOps",        
-      }`
+        "knowsAbout": "Web Development, Full-Stack Development, Nuxt.js, TypeScript, TailwindCSS, DevOps",
+      })
     }
   ]
 })
@@ -104,6 +105,13 @@ main {
   transition: transform 200ms ease-out;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .nav-enter-active,
+  .nav-leave-active {
+    transition: none;
+  }
+}
+
 .nav-enter-from,
 .nav-leave-to {
   transform: translateX(100%);
@@ -112,6 +120,13 @@ main {
 .overlay-enter-active,
 .overlay-leave-active {
   transition: opacity 200ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay-enter-active,
+  .overlay-leave-active {
+    transition: none;
+  }
 }
 
 .overlay-enter-from,

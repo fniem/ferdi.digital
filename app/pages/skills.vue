@@ -6,9 +6,10 @@
       me. I quickly familiarize myself with new frameworks, technologies, and workflows using methods I have refined
       over time for me, so that I can be a reliable and valuable team member others can always depend on.
     </p>
-    <div class="filter-bar">
+    <div class="filter-bar" role="group" aria-label="Filter skills by category">
       <div class="filter-scroll">
-        <button :class="{ active: showAllActive }" @click="showAll">
+        <button :class="{ active: showAllActive }" @click="showAll"
+          :aria-pressed="showAllActive ? 'true' : 'false'" aria-label="Show all skill categories">
           Show all
         </button>
         <button
@@ -16,6 +17,8 @@
           :key="cat"
           :class="{ active: activeFilters.includes(cat) && !showAllActive }"
           @click="toggleFilter(cat)"
+          :aria-pressed="(activeFilters.includes(cat) && !showAllActive) ? 'true' : 'false'"
+          :aria-label="`Filter by ${cat}`"
         >
           {{ cat }}
         </button>

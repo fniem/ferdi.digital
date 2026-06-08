@@ -1,5 +1,5 @@
 <template>
-  <div v-if="message" class="form-message" :class="type">
+  <div v-if="message" :id="id" class="form-message" :class="type" role="alert">
     {{ message }}
   </div>
 </template>
@@ -8,6 +8,7 @@
 defineProps<{
   message: string;
   type: "success" | "error";
+  id?: string;
 }>();
 </script>
 

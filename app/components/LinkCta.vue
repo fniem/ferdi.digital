@@ -1,5 +1,8 @@
 <template>
-  <a v-if="isId || isExternal" :class="{ outline: props.type === 'outline' }" :href="to">
+  <a v-if="isId || isExternal" :class="{ outline: props.type === 'outline' }" :href="to"
+    :target="isExternal ? '_blank' : undefined"
+    :rel="isExternal ? 'noopener noreferrer' : undefined"
+    :aria-label="isExternal ? `${label} (opens in new tab)` : undefined">
     {{ label }}
     <icon v-if="iconName" :name="iconName" />
   </a>

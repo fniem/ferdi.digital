@@ -33,6 +33,15 @@ const { projects, nextImage, toggleMobile } = useImageCarousel();
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  #work .slide-next-enter-active,
+  #work .slide-next-leave-active,
+  #work .slide-prev-enter-active,
+  #work .slide-prev-leave-active {
+    transition: none;
+  }
+}
+
 #work .slide-next-enter-from {
   transform: translateX(20px);
   opacity: 0;

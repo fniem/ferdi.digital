@@ -6,19 +6,22 @@
       </nuxt-link>
     </span>
     <div class="buttons-wrapper">
-      <a href="https://github.com/moinferdi" target="_blank" class="btn social" :class="{ 'social-toggled': navOpen }">
-        <span>
+      <a href="https://github.com/moinferdi" target="_blank" rel="noopener noreferrer" class="btn social" :class="{ 'social-toggled': navOpen }" aria-label="GitHub profile">
+        <span aria-hidden="true">
           <icon name="ri:github-line" />
         </span>
       </a>
-      <a href="https://linkedin.com/in/moinferdi" target="_blank" class="btn social"
-        :class="{ 'social-toggled': navOpen }">
-        <span>
+      <a href="https://linkedin.com/in/moinferdi" target="_blank" rel="noopener noreferrer" class="btn social"
+        :class="{ 'social-toggled': navOpen }" aria-label="LinkedIn profile">
+        <span aria-hidden="true">
           <icon name="ri:linkedin-line" />
         </span>
       </a>
-      <button class="btn" @click="navOpen = !navOpen">
-        <span :class="{ toggled: navOpen }">
+      <button class="btn" @click="navOpen = !navOpen"
+        :aria-expanded="navOpen ? 'true' : 'false'"
+        aria-controls="main-navigation"
+        :aria-label="navOpen ? 'Close menu' : 'Open menu'">
+        <span :class="{ toggled: navOpen }" aria-hidden="true">
 
           <icon name="mi:arrow-left" />
         </span>
@@ -114,6 +117,10 @@ header {
 
         &.toggled {
           transform: rotate(180deg);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          transition: none;
         }
       }
 
