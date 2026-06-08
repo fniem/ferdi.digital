@@ -31,7 +31,7 @@
     </div>
     <div class="project-card__info">
       <header>
-        <h3>{{ project.title }}</h3>
+        <h2>{{ project.title }}</h2>
         <a :href="project.link" target="_blank" rel="noopener noreferrer">{{ project.link }}</a>
         <span> | </span>
         <a :href="project.github" :aria-label="`GitHub repository for ${project.title}`">GitHub</a>
@@ -196,7 +196,7 @@ defineEmits<{
   margin-top: 2rem;
 }
 
-.project-card__info header h3 {
+.project-card__info header h2 {
   color: var(--clr-accent);
   font-size: var(--size-txt-m);
 }

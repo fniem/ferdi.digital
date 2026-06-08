@@ -1,6 +1,6 @@
 <template>
-  <section-wrapper id="contact" title="Let's chat!">
-    <h1 class="sr-only">Contact Ferdinand Niemann – Full-Stack Developer in Lübeck</h1>
+  <section-wrapper id="contact">
+    <h1 class="page-title">Let's chat!</h1>
     <div class="contact-wrapper">
       <div>
         <p>You have an interesting project and need an experienced full-stack developer? Whether you are based in Lübeck, Hamburg, Schleswig-Holstein or anywhere in Germany — I am available for freelance web development, app projects and technical consulting. Reach out via email or the contact form below and I will get back to you as soon as possible.</p>

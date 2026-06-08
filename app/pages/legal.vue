@@ -1,15 +1,15 @@
 <template>
-  <section-wrapper id="legal" title="Legal Notice / Impressum">
-    <h1 class="sr-only">Legal Notice / Impressum – Ferdinand Niemann, Lübeck</h1>
+  <section-wrapper id="legal">
+    <h1 class="page-title">Legal Notice / Impressum</h1>
 
     <div>
       <article>
-        <h3>Angaben gemäß § 5 DDG</h3>
+        <h2>Angaben gemäß § 5 DDG</h2>
         <p>ferdi.digital<br> Berliner Platz 1<br> 23560 Lübeck <br></p>
         <p><strong>Vertreten durch: </strong><br> Ferdinand Niemann<br></p>
       </article>
       <article>
-        <h3>Kontakt</h3>
+        <h2>Kontakt</h2>
         <p> Telefon: 01736834611<br> E-Mail: moin@ferdi.digital</p>
       </article>
       <p><strong>Verbraucherstreitbeilegung / Universalschlichtungsstelle</strong><br>Wir nehmen nicht an
@@ -17,8 +17,8 @@
       </p>
       <p><strong>Datenschutzerklärung</strong><br> Unter dem folgenden Link finden Sie unsere <nuxt-link
           to="/privacy">Datenschutzerklärung</nuxt-link>. </p>
-      <h3>Haftungsausschluss</h3>
-      <h4>Haftung für Inhalte:</h4>
+      <h2>Haftungsausschluss</h2>
+      <h3>Haftung für Inhalte:</h3>
       <p> Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und
         Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1
         DDG
@@ -29,7 +29,7 @@
         diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich.
         Bei
         Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
-      <h4>Haftung für Links:</h4>
+      <h3>Haftung für Links:</h3>
       <p> Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben.
         Deshalb
         können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist
@@ -39,7 +39,7 @@
         erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte
         einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links
         umgehend entfernen.</p>
-      <h4>Urheberrecht:</h4>
+      <h3>Urheberrecht:</h3>
       <p> Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
         Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen
         des

@@ -1,8 +1,5 @@
 <template>
-  <h2 v-if="title" :id="title ? `section-title-${id}` : undefined">
-    {{ title }}
-  </h2>
-  <div :id="id" class="section-wrapper" role="region" :aria-labelledby="title ? `section-title-${id}` : undefined">
+  <div :id="id" class="section-wrapper" role="region">
     <div class="container section">
       <!-- eslint-disable-next-line vue/html-self-closing -->
       <slot></slot>
@@ -12,27 +9,11 @@
 
 <script setup lang="ts">
 defineProps<{
-  title?: string
   id?: string
 }>()
 </script>
 
 <style>
-h2 {
-  font-size: var(--size-txt-xl);
-  font-style: italic;
-  color: var(--clr-accent);
-
-  padding-inline: 2rem;
-  margin-top: 2rem;
-
-  @media screen and (min-width: 768px) {
-    font-size: var(--size-txt-xl);
-
-    margin-block: 2em .5em;
-  }
-}
-
 .section-wrapper {
   padding-bottom: calc(1rem + 3vw);
 

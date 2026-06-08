@@ -1,6 +1,6 @@
 <template>
-  <section-wrapper id="work" title="Websites and apps I created">
-    <h1 class="sr-only">My Work & Projects – Full-Stack Developer Portfolio from Lübeck</h1>
+  <section-wrapper id="work">
+    <h1 class="page-title">Websites and apps I created</h1>
     <p class="intro">
       Here is a selection of my recent private projects. As a full-stack developer based in Lübeck, I build custom websites and web applications — from design to deployment. If you are looking for a developer in Schleswig-Holstein or the Hamburg area for your next website or app project, feel free to <nuxt-link
         to="/contact">get in touch</nuxt-link>.

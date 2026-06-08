@@ -1,6 +1,6 @@
 <template>
-  <section-wrapper id="skills" title="My technology stack and development skills">
-    <h1 class="sr-only">Skills & Tech Stack – Full-Stack Developer Lübeck</h1>
+  <section-wrapper id="skills">
+    <h1 class="page-title">My technology stack and development skills</h1>
     <p class="intro">
       As a full-stack developer with 5+ years of professional experience in Lübeck and northern Germany, I have built
       deep expertise across the entire web development lifecycle. From responsive frontends with Nuxt and Vue to
@@ -23,10 +23,10 @@
     </div>
     <div class="categories-wrapper">
       <div v-for="category in filteredSkills" :key="category.title" class="skill-category">
-        <h3>{{ category.title }}</h3>
+        <h2>{{ category.title }}</h2>
         <template v-if="category?.categories">
           <div v-for="childCategory in category?.categories" :key="childCategory.title" class="category-wrapper">
-            <h4>{{ childCategory.title }}</h4>
+            <h3>{{ childCategory.title }}</h3>
             <div class="skills-wrapper">
               <span v-for="skill in childCategory.stack" :key="skill" class="skill">{{ skill }}</span>
             </div>
@@ -94,7 +94,7 @@ const { activeFilters, showAllActive, filteredSkills, showAll, toggleFilter } = 
 
 <style>
 #skills {
-  h3 {
+  h2 {
     font-size: var(--size-txt-m);
     color: var(--clr-accent);
   }
@@ -173,7 +173,7 @@ const { activeFilters, showAllActive, filteredSkills, showAll, toggleFilter } = 
       margin-top: 4rem;
     }
 
-    h4 {
+    h3 {
       margin-block: 2rem 0;
     }
 
