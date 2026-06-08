@@ -11,8 +11,12 @@
         <button :class="{ active: showAllActive }" @click="showAll">
           Show all
         </button>
-        <button v-for="cat in categoryTitles" :key="cat"
-          :class="{ active: activeFilters.includes(cat) && !showAllActive }" @click="toggleFilter(cat)">
+        <button
+          v-for="cat in skillCategoryTitles"
+          :key="cat"
+          :class="{ active: activeFilters.includes(cat) && !showAllActive }"
+          @click="toggleFilter(cat)"
+        >
           {{ cat }}
         </button>
       </div>
@@ -39,6 +43,8 @@
 </template>
 
 <script setup lang="ts">
+import { skillCategoryTitles } from "~/data/skills";
+
 useHead({
   title: 'My Skills & Tech Stack - Ferdinand Niemann',
   meta: [
@@ -49,98 +55,7 @@ useHead({
   ]
 })
 
-const categoryTitles = [
-  "Frontend",
-  "Backend",
-  "Databases",
-  "AI Tools & Agents",
-  "Testing",
-  "DevOps & CI / CD"
-];
-
-const activeFilters = ref<string[]>([...categoryTitles]);
-
-const showAllActive = computed(() => activeFilters.value.length === categoryTitles.length);
-
-function showAll() {
-  activeFilters.value = [...categoryTitles];
-}
-
-function toggleFilter(cat: string) {
-  if (showAllActive.value) {
-    activeFilters.value = [cat];
-  } else if (activeFilters.value.includes(cat)) {
-    if (activeFilters.value.length === 1) {
-      activeFilters.value = [...categoryTitles];
-    } else {
-      activeFilters.value = activeFilters.value.filter(c => c !== cat);
-    }
-  } else {
-    activeFilters.value = [...activeFilters.value, cat];
-  }
-}
-
-const filteredSkills = computed(() =>
-  skills.filter(s => activeFilters.value.includes(s.title))
-);
-
-const skills = [
-  {
-    title: "Frontend",
-    categories: [
-      {
-        title: "Frameworks & Platforms",
-        stack: ["Nuxt", "Vue", "Next.js", "React", "React Native", "Astro"]
-      },
-      {
-        title: "Languages & Markup",
-        stack: ["TypeScript", "JavaScript", "HTML"]
-      },
-      {
-        title: "Styling",
-        stack: ["TailwindCSS", "SCSS", "CSS"]
-      }
-    ]
-  },
-
-  {
-    title: "Backend",
-    categories: [
-      {
-        title: "Runtimes & Languages",
-        stack: ["Node.js", "Bun", "PHP"]
-      },
-      {
-        title: "Frameworks",
-        stack: ["Express", "Symfony", "Laravel"]
-      },
-      {
-        title: "CMS & BaaS",
-        stack: ["TYPO3", "Directus", "Firebase", "Pimcore"]
-      }
-    ]
-  },
-
-  {
-    title: "Databases",
-    stack: ["PostgreSQL", "MongoDB", "MySQL"]
-  },
-
-  {
-    title: "AI Tools & Agents",
-    stack: ["Pi", "Codex", "Claude Code", "OpenCode", "OpenRouter", "n8n", "GitHub Copilot Agent"]
-  },
-
-  {
-    title: "Testing",
-    stack: ["Jest", "Cypress"]
-  },
-
-  {
-    title: "DevOps & CI / CD",
-    stack: ["Docker", "Git", "GitHub", "SSH", "Linux"]
-  }
-];
+const { activeFilters, showAllActive, filteredSkills, showAll, toggleFilter } = useSkillFilter();
 </script>
 
 <style>
@@ -181,8 +96,7 @@ const skills = [
 
         background: linear-gradient(to right, var(--clr-primary) 20%, transparent 100%) left / var(--padding-container) 100% no-repeat,
         linear-gradient(to left, var(--clr-primary) 20%, transparent 100%) right / var(--padding-container) 100% no-repeat;
-        background-attachment: local,
-        local;
+        background-attachment: local, local;
       }
     }
 
@@ -220,7 +134,7 @@ const skills = [
       margin-top: 8rem;
     }
 
-    .skill-category+.skill-category {
+    .skill-category + .skill-category {
       margin-top: 4rem;
     }
 
@@ -236,8 +150,7 @@ const skills = [
       .skill {
         font-size: var(--size-txt-m);
         background-color: var(--clr-blue-500);
-
-        padding: var(--padding-btn-m)
+        padding: var(--padding-btn-m);
       }
     }
   }

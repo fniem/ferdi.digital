@@ -84,34 +84,6 @@
     @media screen and (min-width: 768px) {
       margin-top: 3rem;
     }
-
-    a {
-      background-color: var(--clr-accent);
-      text-decoration: none;
-      color: var(--clr-primary);
-      padding: var(--padding-btn-l);
-      border: 2px solid var(--clr-accent);
-      font-size: var(--size-txt-sm);
-
-      @media screen and (min-width: 768px) {
-        font-size: var(--size-regular);
-      }
-
-      &:hover {
-        background-color: transparent;
-        color: var(--clr-accent);
-      }
-
-      &.outline {
-        background-color: transparent;
-        color: var(--clr-accent);
-
-        &:hover {
-          background-color: var(--clr-accent);
-          color: var(--clr-primary);
-        }
-      }
-    }
   }
 }
 </style>

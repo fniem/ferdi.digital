@@ -45,24 +45,14 @@
             </nuxt-link></label>
         </div>
         <button :disabled="isLoading">{{ isLoading ? 'Sending...' : 'Send' }}</button>
-        <div v-if="successMessage" class="message success-message">
-          {{ successMessage }}
-        </div>
-        <div v-if="errorMessage" class="message error-message">
-          {{ errorMessage }}
-        </div>
+        <FormMessage :message="successMessage" type="success" />
+        <FormMessage :message="errorMessage" type="error" />
       </form>
     </div>
   </section-wrapper>
 </template>
 
 <script setup lang="ts">
-interface ContactResponse {
-  success?: boolean;
-  message?: string;
-  error?: string;
-}
-
 useHead({
   title: 'Contact Me - Ferdinand Niemann',
   meta: [
@@ -89,64 +79,7 @@ useHead({
   ]
 })
 
-const form = ref<{
-  name: string;
-  mail: string;
-  phone: string;
-  message: string;
-  privacyCheck: boolean;
-  honeypot: string;
-}>(
-  {
-    name: '',
-    mail: '',
-    phone: '',
-    message: '',
-    privacyCheck: false,
-    honeypot: ' '
-  }
-)
-
-const isLoading = ref(false);
-const successMessage = ref('');
-const errorMessage = ref('');
-
-async function sendMail() {
-  successMessage.value = '';
-  errorMessage.value = '';
-  isLoading.value = true;
-
-  try {
-    const response = await $fetch<ContactResponse>('/api/contact', {
-      method: 'POST',
-      body: form.value,
-    });
-
-    if (response.success) {
-      successMessage.value = response.message || 'Your message has been sent successfully!';
-      form.value = {
-        name: '',
-        mail: '',
-        phone: '',
-        message: '',
-        privacyCheck: false,
-        honeypot: form.value.honeypot
-      };
-
-      setTimeout(() => {
-        successMessage.value = '';
-      }, 5000);
-    }
-  } catch (error: unknown) {
-    const err = error as { data?: { statusMessage?: string } };
-    errorMessage.value = err.data?.statusMessage || 'Failed to send your message. Please try again.';
-    setTimeout(() => {
-      errorMessage.value = '';
-    }, 5000);
-  } finally {
-    isLoading.value = false;
-  }
-}
+const { form, isLoading, successMessage, errorMessage, sendMail } = useContactForm();
 </script>
 
 <style scoped>
@@ -169,17 +102,13 @@ async function sendMail() {
       background-color: var(--clr-accent);
       color: var(--clr-primary);
       text-decoration: none;
-
       padding: 1rem;
-
       display: grid;
       justify-items: center;
       gap: 1rem;
 
-      span {
-        &:first-of-type {
-          font-size: var(--size-txt-l);
-        }
+      span:first-of-type {
+        font-size: var(--size-txt-l);
       }
 
       &:hover {
@@ -198,16 +127,12 @@ async function sendMail() {
       label {
         --padding-left: .5rem;
         --border-left: 2px;
-
         background-color: var(--clr-primary);
-
         display: inline-block;
         padding: .25rem .75rem;
         border: 2px solid transparent;
-
         position: absolute;
         left: calc(var(--padding-left) + var(--border-left));
-
         transform: translateY(-50%);
 
         &:has(+input:focus),
@@ -227,7 +152,6 @@ async function sendMail() {
         font-size: var(--size-txt-m);
         background-color: var(--clr-accent);
         font-family: inherit;
-
         padding: 1rem .5rem;
         border: 2px solid transparent;
         width: 100%;
@@ -241,7 +165,6 @@ async function sendMail() {
           border-color: white;
         }
       }
-
     }
 
     #last-name {
@@ -250,10 +173,8 @@ async function sendMail() {
       top: -9999px;
     }
 
-    .privacy-wrapper {
-      a {
-        color: inherit;
-      }
+    .privacy-wrapper a {
+      color: inherit;
     }
 
     button {
@@ -261,7 +182,6 @@ async function sendMail() {
       font-family: inherit;
       background-color: transparent;
       color: white;
-
       border: 2px solid var(--clr-accent);
       padding: var(--padding-btn-m);
 
@@ -273,24 +193,6 @@ async function sendMail() {
       &:disabled {
         opacity: 0.6;
         cursor: not-allowed;
-      }
-    }
-
-    .message {
-      padding: 1rem;
-      border-radius: 4px;
-      font-size: var(--size-txt-m);
-
-      &.success-message {
-        background-color: #4caf50;
-        color: white;
-        border: 2px solid #45a049;
-      }
-
-      &.error-message {
-        background-color: #f44336;
-        color: white;
-        border: 2px solid #da190b;
       }
     }
   }
