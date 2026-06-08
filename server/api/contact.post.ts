@@ -1,3 +1,5 @@
+import { escapeHtml } from "../utils/html";
+
 interface ContactForm {
   name: string;
   mail: string;
@@ -65,15 +67,3 @@ export default defineEventHandler(async (event) => {
     );
   }
 });
-
-// Helper function to escape HTML
-function escapeHtml(text: string): string {
-  const map: Record<string, string> = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;",
-  };
-  return text.replace(/[&<>"']/g, (m) => map[m]);
-}
