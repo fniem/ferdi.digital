@@ -4,7 +4,7 @@
       <div class="hero container">
         <nuxt-img src="/images/profile.jpg" format="webp" loading="eager" preload fetchpriority="high"
           sizes="xs:90vw sm:80vw md:400px lg:600px xl:1000px" alt="Portrait of Ferdinand Niemann" />
-        <h1>Moin! I am Ferdi from Lübeck and <span class="vim-pro">I exit vim like a pro</span></h1>
+        <h1>Moin! I am Ferdi from Lübeck and <span>I exit vim like a pro</span></h1>
         <div class="cta-wrapper">
           <link-cta to="#facts" label="Find out more" icon-name="ri:arrow-down-line" />
           <link-cta to="/contact" label="Get in touch" type="outline" />
@@ -70,7 +70,7 @@
       margin-top: -12rem;
     }
 
-    .vim-pro {
+    span {
       color: var(--clr-accent);
       font-family: cursive;
     }
